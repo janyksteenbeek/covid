@@ -39,7 +39,7 @@ class FetchCountryDataCommand extends Command
      */
     public function handle()
     {
-        foreach(Countries::getAlpha3Codes() as $countryCode) {
+        foreach(Countries::getNames() as $countryCode => $country) {
             FetchDataForCountryJob::dispatch($countryCode);
         }
     }
