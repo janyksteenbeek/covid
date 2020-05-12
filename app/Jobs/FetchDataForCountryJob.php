@@ -50,8 +50,9 @@ class FetchDataForCountryJob implements ShouldQueue
         $dailyData = collect($data['timelineitems'][0]);
 
         $dailyData->each(function ($item, $date) {
-            if(! is_array($item)) return;
+            if(! is_array($item)) return; // @todo fix type checking
 
+            // Inserting all rows
             $this->insertData(
                 $this->parseDate($date),
                 $item
@@ -60,8 +61,17 @@ class FetchDataForCountryJob implements ShouldQueue
         });
     }
 
+    /**
+     * Insert (or update) the data.
+     *
+     * @param Carbon $parseDate
+     * @param array $data
+     * @return Statistic|null
+     */
     private function insertData(Carbon $parseDate, array $data): ?Statistic
     {
+        // Check if we already have data. If so, update it. If not, create it
+
         return Statistic::updateOrCreate([
             'country_code' => $this->country,
             'date' => $parseDate->format('Y-m-d')
@@ -75,6 +85,13 @@ class FetchDataForCountryJob implements ShouldQueue
         ]);
     }
 
+    /**
+     * Parse a date to a Carbon object.
+     *
+     * @param string $date
+     * @return Carbon
+     * @throws \Exception
+     */
     private function parseDate(string $date): Carbon
     {
         return (new Carbon(strtotime( $date)));
