@@ -17,8 +17,8 @@ class CreateStatisticsTable extends Migration
             $table->id();
             $table->date('date')->index();
             $table->string('country_code')->index();
-            $table->unsignedInteger('new_cases');
-            $table->unsignedInteger('new_deaths');
+            $table->integer('new_cases');
+            $table->integer('new_deaths');
             $table->unsignedInteger('total_cases');
             $table->unsignedInteger('total_recoveries');
             $table->unsignedInteger('total_deaths');
