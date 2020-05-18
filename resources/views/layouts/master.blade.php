@@ -24,7 +24,7 @@
 
 
         <hr>
-        <div class="text-muted">Built with <3 by <a href="https://www.janyksteenbeek.nl">Janyk Steenbeek</a>. Data by The Virus Tracker, hosted by
+        <div class="text-muted">Built with <3 by <a href="https://www.janyksteenbeek.nl/?ref=covid-tracker" target="_blank"">Janyk Steenbeek</a>. Data by The Virus Tracker, hosted by
             <a href="https://www.janyksteenbeek.nl/digitalocean">DigitalOcean</a></div>
 
     </div>
