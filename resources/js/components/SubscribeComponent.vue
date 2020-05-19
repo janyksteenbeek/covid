@@ -26,8 +26,7 @@
                 }).then((result) => {
                     if (result.value) {
                         this.$swal.fire({
-                            title: `${result.value.login}'s avatar`,
-                            imageUrl: result.value.avatar_url
+                            title: `Thanks! We'll keep you posted on updates!`
                         })
                     }
                 })
