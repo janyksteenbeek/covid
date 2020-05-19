@@ -1,10 +1,10 @@
 <template>
-    <div class="card">
+    <div class="card my-2">
         <div class="card-body">
             <h3>{{ displayedCount | number }}</h3>
             <div class="text-muted">
                 {{ label }}
-                <div class="badge float-right" v-if="changedCount" :class="{ 'badge-success': changedCount > 0, 'badge-danger': changedCount < 0 }">
+                <div class="badge float-right" v-if="changedCount" :class="{ 'badge-warning': changedCount > 0, 'badge-success': changedCount < 0 }">
                     <span v-if="changedCount > 1">+</span>
                     {{ changedCount }}
                 </div>
@@ -27,7 +27,7 @@
             },
             changedCount: {
                 type: Number,
-                required: true
+                required: false
             }
 
         },
