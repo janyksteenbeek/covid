@@ -8,6 +8,7 @@
     <title>@yield('title', 'COVID Tracker')</title>
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
     <script>
         window._init = @json(['countries' => \App\Constants\Countries::all()]);
     </script>
