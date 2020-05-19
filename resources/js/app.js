@@ -5,6 +5,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 Vue.component('v-select', vSelect);
+
 Vue.mixin({
     data() {
         return {
@@ -13,6 +14,10 @@ Vue.mixin({
             }
         }
     },
+});
+
+Vue.filter('number', (value) => {
+    return new Intl.NumberFormat().format(value);
 });
 
 const files = require.context('./', true, /\.vue$/i)
