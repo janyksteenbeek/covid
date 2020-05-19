@@ -1,5 +1,5 @@
 <template>
-    <span><v-select v-model="country" label="name" placeholder="Choose a country to see data" :options="appdata.countries" style="width:400px; margin-right: 10px"></v-select></span>
+    <span ><v-select v-model="country" label="name" placeholder="Choose a country to see data" class="shadow-lg" :options="appdata.countries" style="width:400px; margin-right: 10px"></v-select></span>
 </template>
 
 <script>

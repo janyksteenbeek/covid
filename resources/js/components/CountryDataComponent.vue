@@ -1,5 +1,5 @@
 <template>
-    <div v-if="statistics">
+    <div v-if="statistics.all.length > 0">
         <div class="row">
             <div class="col-md-4">
                 <statistic-box label="Cases" :count="statistics.latest.total_cases" :changed-count="statistics.latest.new_cases"></statistic-box>
@@ -20,6 +20,9 @@
                 <line-chart :chart-data="deceasedChartData"></line-chart>
             </div>
         </div>
+    </div>
+    <div v-else class="text-center">
+        <h2 class="text-muted py-4">Sorry - no data for this country (yet).</h2>
     </div>
 </template>
 

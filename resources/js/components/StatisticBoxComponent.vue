@@ -1,5 +1,5 @@
 <template>
-    <div class="card my-2">
+    <div class="card my-4 shadow-sm border-0">
         <div class="card-body">
             <h3>{{ displayedCount | number }}</h3>
             <div class="text-muted">

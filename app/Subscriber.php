@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscriber extends Model
 {
-    use EasyEncrypt;
+    protected $guarded = [];
+
+    protected $hidden = ['id'];
+
+    protected $dates = ['last_notified_at'];
 }

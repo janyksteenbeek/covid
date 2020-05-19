@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Subscriber;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -12,13 +13,18 @@ class DataUpdatedNotification extends Notification
     use Queueable;
 
     /**
+     * @var Subscriber
+     */
+    private $subscriber;
+
+    /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Subscriber $subscriber)
     {
-        //
+        $this->subscriber = $subscriber;
     }
 
     /**
@@ -43,7 +49,7 @@ class DataUpdatedNotification extends Notification
         // @todo Add actual numbers
 
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
+                    ->line('')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }

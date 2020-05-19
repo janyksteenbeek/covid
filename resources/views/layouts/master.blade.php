@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>COVID Tracker</title>
+    <title>@yield('title', 'COVID Tracker')</title>
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script>
@@ -24,8 +24,10 @@
 
 
         <hr>
-        <div class="text-muted">Built with <3 by <a href="https://www.janyksteenbeek.nl/?ref=covid-tracker" target="_blank">Janyk Steenbeek</a>. Data by The Virus Tracker, hosted by
-            <a href="https://www.janyksteenbeek.nl/digitalocean">DigitalOcean</a></div>
+        <footer class="text-muted">
+            &#128075; Built by <a href="https://www.janyksteenbeek.nl/?ref=covid-tracker" target="_blank">Janyk Steenbeek</a>. Data by The Virus Tracker, hosted by
+            <a href="https://www.janyksteenbeek.nl/digitalocean">DigitalOcean</a>, source at <a href="https://github.com/janyksteenbeek/covid" target="_blank">Github</a>
+        </footer>
 
     </div>
 
