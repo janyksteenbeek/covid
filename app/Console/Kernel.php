@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\FetchAllDataCommand;
 use App\Console\Commands\FetchCountryDataCommand;
 use App\Console\Commands\UpdateCountriesCommand;
 use Illuminate\Console\Scheduling\Schedule;
@@ -15,6 +16,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        FetchAllDataCommand::class,
         FetchCountryDataCommand::class,
     ];
 

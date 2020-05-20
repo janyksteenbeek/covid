@@ -4,22 +4,23 @@ namespace App\Console\Commands;
 
 use App\Jobs\FetchDataForCountryJob;
 use Illuminate\Console\Command;
+use Symfony\Component\Intl\Countries;
 
-class FetchCountryDataCommand extends Command
+class FetchAllDataCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'fetch:country {code}';
+    protected $signature = 'fetch:all';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Fetch data for a specific country';
+    protected $description = 'Fetch data for all countries';
 
     /**
      * Create a new command instance.
@@ -38,6 +39,8 @@ class FetchCountryDataCommand extends Command
      */
     public function handle()
     {
-        FetchDataForCountryJob::dispatch(strtoupper($this->argument('code')));
+        foreach(Countries::getNames() as $countryCode => $country) {
+            FetchDataForCountryJob::dispatch($countryCode);
+        }
     }
 }
