@@ -2,6 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Notifications\DataUpdatedNotification;
+use App\Statistic;
+use App\Subscriber;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -13,13 +16,24 @@ class NotifyJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
+     * @var Subscriber
+     */
+    private $subscriber;
+    /**
+     * @var Statistic
+     */
+    private $statistic;
+
+    /**
      * Create a new job instance.
      *
-     * @return void
+     * @param Subscriber $subscriber
+     * @param Statistic $statistic
      */
-    public function __construct()
+    public function __construct(Subscriber $subscriber, Statistic $statistic)
     {
-        //
+        $this->subscriber = $subscriber;
+        $this->statistic = $statistic;
     }
 
     /**
@@ -29,6 +43,7 @@ class NotifyJob implements ShouldQueue
      */
     public function handle()
     {
-        //
+        $this->subscriber->notifyNow(new DataUpdatedNotification($this->statistic));
+        $this->subscriber->update(['last_notified_at' => $this->statistic->date]);
     }
 }

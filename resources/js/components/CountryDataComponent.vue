@@ -11,6 +11,7 @@
                 <statistic-box label="Recovered patients" :count="statistics.latest.total_recoveries"></statistic-box>
             </div>
         </div>
+        <div class="text-right text-muted py-2">Last updated at {{ lastUpdated }}</div>
 
         <div class="row">
             <div class="col-md-6">
@@ -46,6 +47,9 @@
             this.fetchData();
         },
         computed: {
+            lastUpdated() {
+                return moment(this.statistics.latest.date).format('DD-MM-YYYY');
+            },
             casesChartData() {
                 return {
                     labels: this.statistics.all.map(item => {

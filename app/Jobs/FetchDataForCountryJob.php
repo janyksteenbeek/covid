@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Constants\Api;
 use App\Statistic;
+use App\Subscriber;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -57,8 +58,9 @@ class FetchDataForCountryJob implements ShouldQueue
                 $this->parseDate($date),
                 $item
             );
-
         });
+
+        $this->notifySubscribers();
     }
 
     /**
@@ -95,5 +97,24 @@ class FetchDataForCountryJob implements ShouldQueue
     private function parseDate(string $date): Carbon
     {
         return (new Carbon(strtotime( $date)));
+    }
+
+    /**
+     * Notify all subscribers of country.
+     */
+    private function notifySubscribers()
+    {
+        $latestStatistic = Statistic::where('country_code', $this->country)->orderBy('date', 'DESC')->first();
+        $notifiableSubscribers = Subscriber::where('country', $this->country)->where(function ($query) use ($latestStatistic) {
+            $query->whereNull('last_notified_at');
+
+            if(! empty($latestStatistic)) {
+                $query->orWhere('last_notified_at', '<', $latestStatistic->date);
+            }
+        })->get();
+
+        foreach($notifiableSubscribers as $subscriber) {
+            NotifyJob::dispatch($subscriber, $latestStatistic);
+        }
     }
 }
