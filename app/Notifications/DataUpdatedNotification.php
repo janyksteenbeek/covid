@@ -62,7 +62,7 @@ class DataUpdatedNotification extends Notification
                     ->line('New deceased: ' . $this->statistic->new_deaths)
                     ->line('Total cases: ' . $this->statistic->total_cases)
                     ->line('Total deceased: ' . $this->statistic->total_deaths)
-                    ->line('Total recovered: ' . $this->statistic->total_deaths)
+                    ->line('Total recovered: ' . $this->statistic->total_recoveries)
                     ->action('View data on COVID tracker', route('country', ['code' => $this->statistic->country_code]))
                     ->line('If you would like to unsubscribe from these e-mails, please reply to this e-mail and we will remove you from the list.');
     }
