@@ -1,0 +1,18 @@
+"A date string with format `Y-m-d`, e.g. `2011-05-23`."
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+
+type Query {
+    statistics(country_code: String @eq, orderBy: _ @orderBy(columns: ["date", "new_cases", "new_deaths",
+        "total_cases", "total_deaths", "total_recoveries"])): [Statistic] @all
+}
+
+type Statistic {
+    id: ID!
+    date: Date!
+    country_code: String!
+    new_cases: Int!
+    new_deaths: Int!
+    total_cases: Int!,
+    total_deaths: Int!,
+    total_recoveries: Int!,
+}
