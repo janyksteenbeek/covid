@@ -10,6 +10,6 @@ abstract class Api
 
     public static function url($country)
     {
-        return self::BASE_URL . strtoupper($country);
+        return self::BASE_URL.strtoupper($country);
     }
 }
