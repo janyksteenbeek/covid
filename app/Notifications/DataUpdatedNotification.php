@@ -58,11 +58,11 @@ class DataUpdatedNotification extends Notification
         return (new MailMessage)
             ->subject("New COVID-19 data for {$country} ({$date})")
                     ->greeting("New COVID-19 data for {$country} ({$date})")
-                    ->line('New cases: ' . $this->statistic->new_cases)
-                    ->line('New deceased: ' . $this->statistic->new_deaths)
-                    ->line('Total cases: ' . $this->statistic->total_cases)
-                    ->line('Total deceased: ' . $this->statistic->total_deaths)
-                    ->line('Total recovered: ' . $this->statistic->total_recoveries)
+                    ->line('New cases: '.$this->statistic->new_cases)
+                    ->line('New deceased: '.$this->statistic->new_deaths)
+                    ->line('Total cases: '.$this->statistic->total_cases)
+                    ->line('Total deceased: '.$this->statistic->total_deaths)
+                    ->line('Total recovered: '.$this->statistic->total_recoveries)
                     ->action('View data on COVID tracker', route('country', ['code' => $this->statistic->country_code]))
                     ->line('If you would like to unsubscribe from these e-mails, please reply to this e-mail and we will remove you from the list.');
     }

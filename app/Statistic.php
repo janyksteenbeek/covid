@@ -17,6 +17,6 @@ class Statistic extends Model
     ];
 
     protected $dates = [
-        'date'
+        'date',
     ];
 }

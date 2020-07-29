@@ -19,7 +19,7 @@ class CountryController extends Controller
 
         try {
             $country = Countries::getName($countryCode);
-        } catch(MissingResourceException $exception) {
+        } catch (MissingResourceException $exception) {
             logger()->info("[COVID tracker] Missing country: {$countryCode}");
             abort(404);
         }

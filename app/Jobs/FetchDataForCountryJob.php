@@ -43,7 +43,7 @@ class FetchDataForCountryJob implements ShouldQueue
 
         $data = Http::get($url)->json();
 
-        if(! isset($data['timelineitems'])) {
+        if (! isset($data['timelineitems'])) {
             // No data found for this country, let's skip it.
             return;
         }
@@ -51,7 +51,9 @@ class FetchDataForCountryJob implements ShouldQueue
         $dailyData = collect($data['timelineitems'][0]);
 
         $dailyData->each(function ($item, $date) {
-            if(! is_array($item)) return; // @todo fix type checking
+            if (! is_array($item)) {
+                return;
+            } // @todo fix type checking
 
             // Inserting all rows
             $this->insertData(
@@ -76,7 +78,7 @@ class FetchDataForCountryJob implements ShouldQueue
 
         return Statistic::updateOrCreate([
             'country_code' => $this->country,
-            'date' => $parseDate->format('Y-m-d')
+            'date' => $parseDate->format('Y-m-d'),
         ],
         [
             'new_cases' => $data['new_daily_cases'],
@@ -96,7 +98,7 @@ class FetchDataForCountryJob implements ShouldQueue
      */
     private function parseDate(string $date): Carbon
     {
-        return (new Carbon(strtotime( $date)));
+        return new Carbon(strtotime($date));
     }
 
     /**
@@ -108,12 +110,12 @@ class FetchDataForCountryJob implements ShouldQueue
         $notifiableSubscribers = Subscriber::where('country', $this->country)->where(function ($query) use ($latestStatistic) {
             $query->whereNull('last_notified_at');
 
-            if(! empty($latestStatistic)) {
+            if (! empty($latestStatistic)) {
                 $query->orWhere('last_notified_at', '<', $latestStatistic->date);
             }
         })->get();
 
-        foreach($notifiableSubscribers as $subscriber) {
+        foreach ($notifiableSubscribers as $subscriber) {
             NotifyJob::dispatch($subscriber, $latestStatistic);
         }
     }
